@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+#
+
+공부 몰입/집중할때 켜 놓는 집중 타이머
+
 ## Available Scripts
 
 In the project directory, you can run:
