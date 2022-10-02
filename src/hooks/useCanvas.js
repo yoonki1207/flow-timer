@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * useCanvas
@@ -9,10 +9,10 @@ import { useEffect } from "react";
  */
 export const useCanvas = (canvasWidth, canvasHeight, animate, deps) => {
   const canvasRef = useRef(null);
+  const canvas = canvasRef.current;
+  const ctx = canvas?.getContext("2d");
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+  const initCanvas = () => {
     const setCanvas = () => {
       const devicePixelRatio = window.devicePixelRatio ?? 1;
       if (canvas && ctx) {
@@ -24,13 +24,24 @@ export const useCanvas = (canvasWidth, canvasHeight, animate, deps) => {
 
         ctx.scale(devicePixelRatio, devicePixelRatio);
       }
-
-      if (ctx) {
-        animate(ctx);
-      }
     };
     setCanvas();
-  }, [canvasWidth, canvasHeight].concat(deps ?? []));
+  };
+
+  const anim = () => {
+    window.requestAnimationFrame(anim);
+    if (ctx) {
+      animate(ctx);
+    }
+  };
+
+  useEffect(() => {
+    window.requestAnimationFrame(anim);
+  }, []);
+
+  useEffect(() => {
+    initCanvas();
+  }, [canvasWidth, canvasHeight, animate]);
 
   return canvasRef;
 };

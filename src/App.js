@@ -1,11 +1,11 @@
-import { Timer } from "./common/Components/Timer";
 import "./App.css";
+import FlowModule from "./modules/FlowModule/FlowModule";
 
 function App() {
   return (
-    <div>
-      <Timer />
-    </div>
+    <>
+      <FlowModule />
+    </>
   );
 }
 
