@@ -5,16 +5,16 @@ import { useEffect, useRef } from "react";
  * @param {number} canvasWidth canvas width
  * @param {number} canvasHeight canvas height
  * @param {(CanvasRenderingContext2D)=>void} animate animate callback function
- * @param {any[]} deps dependencies
  */
-export const useCanvas = (canvasWidth, canvasHeight, animate, deps) => {
+export const useCanvas = (canvasWidth, canvasHeight, animate) => {
   const canvasRef = useRef(null);
-  const canvas = canvasRef.current;
-  const ctx = canvas?.getContext("2d");
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
 
-  const initCanvas = () => {
     const setCanvas = () => {
       const devicePixelRatio = window.devicePixelRatio ?? 1;
+
       if (canvas && ctx) {
         canvas.style.width = canvasWidth + "px";
         canvas.style.height = canvasHeight + "px";
@@ -26,22 +26,19 @@ export const useCanvas = (canvasWidth, canvasHeight, animate, deps) => {
       }
     };
     setCanvas();
-  };
 
-  const anim = () => {
-    window.requestAnimationFrame(anim);
-    if (ctx) {
-      animate(ctx);
-    }
-  };
+    let requestId;
+    const requestAnimation = () => {
+      requestId = window.requestAnimationFrame(requestAnimation);
+      if (ctx) {
+        animate(ctx);
+      }
+    };
+    requestAnimation();
 
-  useEffect(() => {
-    window.requestAnimationFrame(anim);
-  }, []);
-
-  useEffect(() => {
-    initCanvas();
+    return () => {
+      window.cancelAnimationFrame(requestId);
+    };
   }, [canvasWidth, canvasHeight, animate]);
-
   return canvasRef;
 };
