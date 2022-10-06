@@ -1,10 +1,11 @@
 import "./App.css";
 import FlowModule from "./modules/FlowModule/FlowModule";
+import { MainMoudle } from "./modules/MainModule/MainModule";
 
 function App() {
   return (
     <>
-      <FlowModule />
+      <MainMoudle />
     </>
   );
 }

@@ -22,7 +22,7 @@ const FlowModule = () => {
   );
 };
 
-export default React.memo(FlowModule);
+export default FlowModule;
 
 const Main = styled.main`
   width: 100%;
