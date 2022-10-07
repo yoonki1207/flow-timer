@@ -8,6 +8,7 @@ export const TimerCard = ({ title }) => {
 };
 
 const TimeCardBox = styled.div`
+  display: flex;
   width: 200px;
   height: 300px;
   color: #ffffff66;
@@ -16,7 +17,6 @@ const TimeCardBox = styled.div`
   text-transform: uppercase;
   margin: 15px;
   transition: 0.125s all ease;
-  display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
