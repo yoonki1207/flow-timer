@@ -1,11 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import FlowModule from "./modules/FlowModule/FlowModule";
+import MainMoudle from "./modules/MainModule/MainModule";
 
 function App() {
   return (
-    <>
-      <FlowModule />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<MainMoudle />}/>
+        <Route path='/wave' element={<FlowModule />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,41 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useCanvas } from "../../hooks/useCanvas";
-import { Dot } from "./share/Dot";
+import { TimeText } from "../share/TimeText";
+import { Wave } from "./Wave";
 
 /**
  *
  * @param {number} canvasWidth
  * @param {number} canvasHeight
- * @returns
+ * @returns {React.FC}
  */
-const FlowCanvas = ({ canvasWidth, canvasHeight, timeHeight }) => {
-  const tick = useRef(0);
-  const dots = useRef([]);
+const FlowCanvas = ({ canvasWidth, canvasHeight }) => {
   /**
    *
-   * @param {CanvasRenderingContext2D} ctx canvas context 2d
+   * @param {CanvasRenderingContext2D} ctx
    */
-  const animate = (ctx) => {
-    ctx.beginPath();
-    ctx.fillStyle = "#ffee88";
-    ctx.moveTo(0, timeHeight / 2);
-    ctx.lineTo(0, canvasHeight);
-    ctx.lineTo(canvasWidth, canvasHeight);
-    ctx.lineTo(canvasWidth, timeHeight / 2);
-    ctx.fill();
-    console.log("animated");
+  const fillBackground = (ctx) => {
+    ctx.fillStyle = `rgb(31, 31, 36)`;
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
   };
-  const canvasRef = useCanvas(canvasWidth, canvasHeight, animate, [
-    tick.current,
-  ]);
 
-  useEffect(() => {
-    console.log("Somethings change on FlowCanvas");
-  });
+  const animate = (ctx) => {
+    fillBackground(ctx);
+    wave.animate(ctx);
+    timeText.animate(ctx);
+  };
 
-  useEffect(() => {
-    console.log("FlowCanvas mounted");
-  }, []);
+  let wave = new Wave(canvasWidth, canvasHeight, 5, canvasHeight / 2);
+  let timeText = new TimeText(
+    canvasWidth / 2,
+    canvasHeight / 2,
+    "Hello, wolrd!",
+    "rgba(255, 255, 255, 0.7)"
+  );
+
+  const canvasRef = useCanvas(canvasWidth, canvasHeight, animate);
 
   return <canvas ref={canvasRef} />;
 };
