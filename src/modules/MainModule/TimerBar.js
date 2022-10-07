@@ -11,7 +11,7 @@ const TimerBar = ({onDrag}) => {
     <Draggable
     axis='x'
     grid={[10, 0]}
-    defaultPosition={{x: INIT_TIME, y: 0}}
+    defaultPosition={{x: INIT_TIME*10, y: 0}}
     onDrag={onDrag}
     bounds={{left: 10, right: 600}}>
         <div className="progress-btn"></div>
