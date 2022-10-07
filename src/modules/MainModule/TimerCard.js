@@ -4,8 +4,11 @@ import { useTimeDispatch, useTimeState } from "../share/TimeProvider";
 
 // TODO: Time card for select format of timer
 export const TimerCard = ({ title }) => {
+  const dispatch = useTimeDispatch();
+  const state = useTimeState();
   const navigate = useNavigate();
   const onClick = () => {
+    dispatch({type: 'SET_TIME', state: {target: state, time: new Date().setMinutes(new Date().getMinutes() +  Math.ceil(state))}})
     navigate(`/${title}`, {state: 'wave-state'});
   }
   return <TimeCardBox onClick={onClick}>{title}</TimeCardBox>;

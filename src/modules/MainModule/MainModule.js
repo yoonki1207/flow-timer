@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTimeDispatch } from "../share/TimeProvider";
 import TimerBar from "./TimerBar";
@@ -13,8 +13,14 @@ const MainMoudle = () => {
 
   const onDrag = (e, data) => {
     setTime(data.x);
-    dispatch({type:'SET_TIME', state: Math.ceil(+data.x/10)});
+    const t = +data.x/10;
+    console.log(t);
+    dispatch({type:'SET_TIME', state: t});
   }
+  useEffect(()=>{
+    window.localStorage.clear();
+    dispatch({type: 'SET_TIME', state: INIT_TIME})
+  }, []);
   return (
     <Main><Title>{"FLOW TIMER"}</Title>
       <TimerCardList />
