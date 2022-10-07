@@ -10,7 +10,6 @@ export class Wave {
     this.velocity = 0.05;
     for (let i = 0; i < totalPoints; i++) {
       const point = new Point(i, (i / (totalPoints - 1)) * this.width, y);
-      console.log(i / totalPoints);
       this.points[i] = point;
     }
     this.y = y;

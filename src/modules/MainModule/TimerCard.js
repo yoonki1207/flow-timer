@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useTimeDispatch, useTimeState } from "../share/TimeProvider";
 
 // TODO: Time card for select format of timer
 export const TimerCard = ({ title }) => {
   const navigate = useNavigate();
-  return <TimeCardBox onClick={() => (navigate(`/${title}`, {state: 'wave-state'}))}>{title}</TimeCardBox>;
+  const onClick = () => {
+    navigate(`/${title}`, {state: 'wave-state'});
+  }
+  return <TimeCardBox onClick={onClick}>{title}</TimeCardBox>;
 };
 
 const TimeCardBox = styled.div`

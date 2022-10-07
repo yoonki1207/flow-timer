@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useTimeDispatch } from "../share/TimeProvider";
 import TimerBar from "./TimerBar";
 import { TimerCardList } from "./TimerCardList";
 
@@ -8,10 +9,12 @@ export const INIT_TIME = 500;
 const MainMoudle = () => {
   
   const [time, setTime] = useState(INIT_TIME);
+  const dispatch = useTimeDispatch();
 
   const onDrag = (e, data) => {
     setTime(data.x);
-    console.log(data);
+    console.log(data.x);
+    dispatch({type:'SET_TIME', state: +data.x});
   }
   return (
     <Main><Title>{"FLOW TIMER"}</Title>
