@@ -16,7 +16,7 @@ export class TimeText {
     ctx.font = "150px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(new Date().toTimeString().substring(0, 8), this.x, this.y);
+    ctx.fillText(this.text, this.x, this.y);
     ctx.closePath();
   }
 }

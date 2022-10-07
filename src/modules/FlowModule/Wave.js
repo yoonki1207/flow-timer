@@ -10,7 +10,6 @@ export class Wave {
     this.velocity = 0.05;
     for (let i = 0; i < totalPoints; i++) {
       const point = new Point(i, (i / (totalPoints - 1)) * this.width, y);
-      console.log(i / totalPoints);
       this.points[i] = point;
     }
     this.y = y;
@@ -29,8 +28,11 @@ export class Wave {
     ctx.moveTo(prevX, prevY);
 
     for (let i = 0; i < this.totalPoints; i++) {
+      this.points[i].fixedY = this.y;
       if (i < this.totalPoints - 1 && i !== 0) {
         this.points[i].update();
+      } else {
+        this.points[i].y = this.y;
       }
 
       const cx = (prevX + this.points[i].x) / 2;

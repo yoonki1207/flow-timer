@@ -2,15 +2,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import FlowModule from "./modules/FlowModule/FlowModule";
 import MainMoudle from "./modules/MainModule/MainModule";
+import { TimeProvider } from "./modules/share/TimeProvider";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<MainMoudle />}/>
-        <Route path='/wave' element={<FlowModule />}/>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={
+    <TimeProvider><MainMoudle /></TimeProvider>}/>
+          <Route path='/wave' element={ <TimeProvider><FlowModule /></TimeProvider>}/>
+        </Routes>
+      </BrowserRouter>
   );
 }
 

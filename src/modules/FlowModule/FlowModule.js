@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useClientWidthHeight } from "../../hooks/useClientWidthHeight";
+import { useTimeState } from "../share/TimeProvider";
 import FlowCanvas from "./FlowCanvas";
 
 // 시작 시간: 시작 시간
@@ -10,14 +11,27 @@ import FlowCanvas from "./FlowCanvas";
 const FlowModule = () => {
   /**
    * @type {RefObject<HTMLElement>}
-   */
+   */ 
   const mainRef = useRef(null);
+  const {time: minutesL, target: totalTime} = useTimeState();
+  const [time, setTime] = useState(null);
+  const [targetTime, setTargetTime] = useState(null);
   const { width: canvasWidth, height: canvasHeight } =
     useClientWidthHeight(mainRef);
-
+  useEffect(()=> {
+    setTargetTime(new Date(minutesL));
+    // console.log(new Date(minutesL - new Date()).toTimeString());
+    if(!window.localStorage.getItem("targetTime")) {
+      window.localStorage.setItem("targetTime", minutesL);
+      setTargetTime(minutesL);
+    } else {
+      const target = window.localStorage.getItem("targetTime");
+      setTargetTime(target);
+    }
+  }, []);
   return (
     <Main ref={mainRef}>
-      <FlowCanvas canvasWidth={canvasWidth} canvasHeight={canvasHeight} />
+      <FlowCanvas canvasWidth={canvasWidth} canvasHeight={canvasHeight} targetTime={targetTime} totalTime={totalTime}/>
     </Main>
   );
 };
