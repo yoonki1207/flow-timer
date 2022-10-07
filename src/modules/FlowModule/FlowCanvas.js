@@ -15,7 +15,6 @@ const FlowCanvas = ({ canvasWidth, canvasHeight }) => {
    * @param {CanvasRenderingContext2D} ctx
    */
   const fillBackground = (ctx) => {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     ctx.fillStyle = `rgb(31, 31, 36)`;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
   };

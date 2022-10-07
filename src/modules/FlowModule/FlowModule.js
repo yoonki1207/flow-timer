@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { useClientWidthHeight } from "../../hooks/useClientWidthHeight";
 import FlowCanvas from "./FlowCanvas";
@@ -25,6 +25,10 @@ const FlowModule = () => {
 export default FlowModule;
 
 const Main = styled.main`
-  width: 100%;
-  height: 100%;
+width: 100%;
+height: 100%;
+background: black;
+display: flex;
+justify-content: center;
+align-items: center;
 `;

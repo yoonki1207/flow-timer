@@ -1,27 +1,11 @@
-import { useState } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
-import FlowModule from "../FlowModule/FlowModule";
-import { TimerCard } from "./TimerCard";
 import { TimerCardList } from "./TimerCardList";
 
-export const MainMoudle = () => {
-  const onClick = () => {
-  };
+const MainMoudle = () => {
+  
   return (
-    
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={
-          <Main><TimerCardList/></Main>
-        }/>
-        <Route path='/wave' element={
-          <Main>
-            <FlowModule/>
-          </Main>
-        }/>
-      </Routes>
-    </BrowserRouter>
+    <Main><TimerCardList /></Main>
   );
 };
 
@@ -33,3 +17,4 @@ const Main = styled.main`
   justify-content: center;
   align-items: center;
 `;
+export default React.memo(MainMoudle);
