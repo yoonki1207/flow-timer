@@ -1,11 +1,11 @@
 import { TimerCard } from "./TimerCard";
 
-export const TimerCardList = ({ onClick }) => {
-  const timerList = ["WAVE", "CIRCLE", "BINARY", "SCALED"];
+export const TimerCardList = () => {
+  const timerList = ["wave", "circle", "binary", "scaled"];
   return (
     <>
       {timerList.map((val) => (
-        <TimerCard key={val} title={val} onClick={onClick} />
+        <TimerCard key={val} title={val}/>
       ))}
     </>
   );
