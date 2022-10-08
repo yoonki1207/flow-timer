@@ -1,9 +1,10 @@
 import { Point } from "../share/Point";
 
 export class Wave {
-  constructor(width, height, totalPoints, y) {
+  constructor(width, height, totalPoints, y, color) {
     this.width = width;
     this.height = height;
+    this.color = color;
     this.totalPoints = totalPoints;
     this.points = [];
     this.val = 0;
@@ -21,7 +22,7 @@ export class Wave {
    */
   animate(ctx) {
     ctx.beginPath();
-    ctx.fillStyle = `rgba(0, 0, 0, 0.2)`;
+    ctx.fillStyle = this.color;
     let prevX = this.points[0].x;
     let prevY = this.points[0].y;
 

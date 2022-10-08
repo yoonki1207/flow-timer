@@ -6,7 +6,7 @@ export const TimerCardList = () => {
   return (
     <TimerCardListBox>
       {timerList.map((val) => (
-        <TimerCard key={val} title={val}/>
+        <TimerCard key={val} title={val} />
       ))}
     </TimerCardListBox>
   );
@@ -15,4 +15,4 @@ export const TimerCardList = () => {
 const TimerCardListBox = styled.div`
   display: flex;
   flex-direction: row;
-`
+`;
