@@ -1,27 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useRef, useState } from "react";
 import { useClientWidthHeight } from "../../hooks/useClientWidthHeight";
 import { Main } from "../share/StyledBox";
 import { useTimeState } from "../share/TimeProvider";
-import FlowCanvas from "./FlowCanvas";
+import ClockCanvas from "./ClockCanvas";
 
-// 시작 시간: 시작 시간
-// 끝 시간: 시작 시간 + 목표 시간
-// 현재 시간: 현재시간
-
-const FlowModule = () => {
-  /**
-   * @type {RefObject<HTMLElement>}
-   */
+const ClockModule = () => {
   const mainRef = useRef(null);
-  const { time: minutesL, target: totalTime } = useTimeState();
+  const { time: minutesL, target: maxTime } = useTimeState();
+  const [totalTime, setTotalTime] = useState(null);
   const [targetTime, setTargetTime] = useState(null);
   const { width: canvasWidth, height: canvasHeight } =
     useClientWidthHeight(mainRef);
 
   useEffect(() => {
     setTargetTime(new Date(minutesL));
-    // console.log(new Date(minutesL - new Date()).toTimeString());
     if (!window.localStorage.getItem("targetTime")) {
       window.localStorage.setItem("targetTime", minutesL);
       setTargetTime(minutesL);
@@ -29,11 +21,19 @@ const FlowModule = () => {
       const target = window.localStorage.getItem("targetTime");
       setTargetTime(target);
     }
+
+    if (!window.localStorage.getItem("totalTime")) {
+      window.localStorage.setItem("totalTime", maxTime);
+      setTotalTime(maxTime);
+    } else {
+      const total = window.localStorage.getItem("totalTime");
+      setTotalTime(total);
+    }
   }, []);
 
   return (
     <Main ref={mainRef}>
-      <FlowCanvas
+      <ClockCanvas
         canvasWidth={canvasWidth}
         canvasHeight={canvasHeight}
         targetTime={targetTime}
@@ -43,4 +43,4 @@ const FlowModule = () => {
   );
 };
 
-export default FlowModule;
+export default ClockModule;
